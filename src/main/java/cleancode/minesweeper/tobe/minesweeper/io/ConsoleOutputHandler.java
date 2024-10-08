@@ -12,12 +12,7 @@ import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class ConsoleOutputHandler implements OutputHandler {
-
     public static final CellSignFinder CELL_SIGN_FINDER = new CellSignFinder();
-    private static final String EMPTY_SIGN = "■";
-    private static final String FLAG_SIGN = "⚑";
-    private static final String UNCHECKED_SIGN = "□";
-    private static final String LAND_MINE_SIGN = "☼";
     @Override
     public void showGameStartComments() {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
