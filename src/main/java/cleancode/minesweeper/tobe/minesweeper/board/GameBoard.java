@@ -6,6 +6,8 @@ import cleancode.minesweeper.tobe.minesweeper.board.position.CellPositions;
 import cleancode.minesweeper.tobe.minesweeper.board.position.RelativePosition;
 import cleancode.minesweeper.tobe.minesweeper.board.cell.*;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
 
 public class GameBoard {
@@ -139,6 +141,7 @@ public class GameBoard {
                 .toList();
     }
 
+/*  재귀로 인한 StackOverFlow
     private void openSurroundedCells(CellPosition cellPosition) {
         if (isOpenedCell(cellPosition)) {
             return;
@@ -156,12 +159,41 @@ public class GameBoard {
         List<CellPosition> surroundedPositions = calculateSurroundedPositions(cellPosition, getRowSize(), getColSize());
         surroundedPositions.forEach(this::openSurroundedCells);
 
-        /*for (RelativePosition relativePosition : RelativePosition.SURROUNDED_POSITIONS) {
+        *//*for (RelativePosition relativePosition : RelativePosition.SURROUNDED_POSITIONS) {
             if(cellPosition.canCalculatePositionBy(relativePosition)){
                 CellPosition nextCellPosition = cellPosition.calculatePositionBy(relativePosition);
                 openSurroundedCells(nextCellPosition);
             }
-        }*/
+        }*//*
+    }*/
+    private void openSurroundedCells(CellPosition cellPosition){
+        Deque<CellPosition> stack = new ArrayDeque<>();
+        stack.push(cellPosition);
+
+        while(!stack.isEmpty()){
+            openAndPushCellAt(stack);
+        }
+    }
+
+    private void openAndPushCellAt(Deque<CellPosition> stack) {
+        CellPosition currentCellPosition = stack.pop();
+        if (isOpenedCell(currentCellPosition)) {
+            return;
+        }
+        if (isLandMineCellAt(currentCellPosition)) {
+            return;
+        }
+
+        openOneCellAt(currentCellPosition);
+
+        if (doseCellHaveLandMineCount(currentCellPosition)) {
+            return;
+        }
+
+        List<CellPosition> surroundedPositions = calculateSurroundedPositions(currentCellPosition, getRowSize(), getColSize());
+        for (CellPosition surroundedPosition : surroundedPositions) {
+            stack.push(surroundedPosition);
+        }
     }
 
     private void openOneCellAt(CellPosition cellPosition) {
