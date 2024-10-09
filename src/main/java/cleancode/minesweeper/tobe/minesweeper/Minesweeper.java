@@ -1,13 +1,13 @@
 package cleancode.minesweeper.tobe.minesweeper;
 
-import cleancode.minesweeper.tobe.minesweeper.board.GameBoard;
-import cleancode.minesweeper.tobe.minesweeper.config.GameConfig;
-import cleancode.minesweeper.tobe.minesweeper.exception.GameException;
 import cleancode.minesweeper.tobe.game.GameInitializable;
 import cleancode.minesweeper.tobe.game.GameRunnable;
+import cleancode.minesweeper.tobe.minesweeper.board.GameBoard;
+import cleancode.minesweeper.tobe.minesweeper.board.position.CellPosition;
+import cleancode.minesweeper.tobe.minesweeper.config.GameConfig;
+import cleancode.minesweeper.tobe.minesweeper.exception.GameException;
 import cleancode.minesweeper.tobe.minesweeper.io.InputHandler;
 import cleancode.minesweeper.tobe.minesweeper.io.OutputHandler;
-import cleancode.minesweeper.tobe.minesweeper.board.position.CellPosition;
 import cleancode.minesweeper.tobe.minesweeper.user.UserAction;
 
 public class Minesweeper implements GameInitializable, GameRunnable {
@@ -22,7 +22,7 @@ public class Minesweeper implements GameInitializable, GameRunnable {
     }
 
     @Override
-    public void initialize(){
+    public void initialize() {
         gameBoard.initializeGame();
     }
 
@@ -57,7 +57,7 @@ public class Minesweeper implements GameInitializable, GameRunnable {
     private CellPosition getCellInputFromUser() {
         outputHandler.showCommentForSelectingCell();
         CellPosition cellPosition = inputHandler.getCellPositionFromUser();
-        if(gameBoard.isInvalidCellPosition(cellPosition)){
+        if (gameBoard.isInvalidCellPosition(cellPosition)) {
             throw new GameException("잘못된 좌표를 선택하셨습니다.");
         }
         return cellPosition;
@@ -83,11 +83,11 @@ public class Minesweeper implements GameInitializable, GameRunnable {
     }
 
     private boolean doseUserChooseToPlantFlag(UserAction userActionInput) {
-        return userActionInput==UserAction.FLAG;
+        return userActionInput == UserAction.FLAG;
     }
 
     private boolean doseUserChooseToOpenCell(UserAction userActionInput) {
-        return userActionInput==UserAction.OPEN;
+        return userActionInput == UserAction.OPEN;
     }
 
 }

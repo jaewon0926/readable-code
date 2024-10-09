@@ -9,7 +9,8 @@ public class Cells {
     private Cells(List<Cell> cells) {
         this.cells = cells;
     }
-    public static Cells of(List<Cell> cells){
+
+    public static Cells of(List<Cell> cells) {
         return new Cells(cells);
     }
 

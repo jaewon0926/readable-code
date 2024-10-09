@@ -1,9 +1,9 @@
 package cleancode.minesweeper.tobe.minesweeper.io;
 
 import cleancode.minesweeper.tobe.minesweeper.board.GameBoard;
-import cleancode.minesweeper.tobe.minesweeper.exception.GameException;
 import cleancode.minesweeper.tobe.minesweeper.board.cell.CellSnapshot;
 import cleancode.minesweeper.tobe.minesweeper.board.position.CellPosition;
+import cleancode.minesweeper.tobe.minesweeper.exception.GameException;
 import cleancode.minesweeper.tobe.minesweeper.io.sign.CellSignFinder;
 import cleancode.minesweeper.tobe.minesweeper.io.sign.CellSignProvider;
 
@@ -13,6 +13,7 @@ import java.util.stream.IntStream;
 
 public class ConsoleOutputHandler implements OutputHandler {
     public static final CellSignFinder CELL_SIGN_FINDER = new CellSignFinder();
+
     @Override
     public void showGameStartComments() {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
@@ -23,7 +24,7 @@ public class ConsoleOutputHandler implements OutputHandler {
     @Override
     public void showBoard(GameBoard board) {
         String alphabets = generateColAlphabets(board);
-        System.out.println("    "+alphabets);
+        System.out.println("    " + alphabets);
 
         for (int row = 0; row < board.getRowSize(); row++) {
             System.out.printf("%2d  ", row + 1);
@@ -76,7 +77,7 @@ public class ConsoleOutputHandler implements OutputHandler {
                 .map(Objects::toString)
                 .toList();
 
-        String joiningAlphabets = String.join(" ",alphabets);
+        String joiningAlphabets = String.join(" ", alphabets);
         return joiningAlphabets;
     }
 }
